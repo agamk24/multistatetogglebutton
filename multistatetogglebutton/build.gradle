@@ -10,13 +10,13 @@ def siteUrl = 'https://github.com/jlhonora/MultiStateToggleButton'
 def gitUrl = 'https://github.com/jlhonora/MultiStateToggleButton.git'
 
 android {
-    namespace "org.honorato.multistatetogglebutton" // ✅ Tambahkan namespace
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    namespace "org.honorato.multistatetogglebutton"
+    compileSdkVersion 34
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         minSdkVersion 11
-        targetSdkVersion 23
+        targetSdkVersion 34
         versionCode mVersionCode
         versionName mVersionName
     }
@@ -28,12 +28,17 @@ android {
             res.srcDirs  = ['res']
         }
     }
+
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
 }
 
 dependencies {
     implementation 'com.android.support:appcompat-v7:23.4.0'
 }
 
+/*
 tasks.register("sourcesJar", Jar) {
     from android.sourceSets.main.java.srcDirs
     archiveClassifier.set("sources")
@@ -43,4 +48,4 @@ tasks.register("javadocJar", Jar) {
     dependsOn javadoc
     from javadoc.destinationDir
     archiveClassifier.set("javadoc")
-}
+}*/
