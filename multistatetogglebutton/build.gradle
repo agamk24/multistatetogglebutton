@@ -38,14 +38,52 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:23.4.0'
 }
 
-/*
-tasks.register("sourcesJar", Jar) {
-    from android.sourceSets.main.java.srcDirs
-    archiveClassifier.set("sources")
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+//def mVersionCode = 10
+//def mVersionName = "0.2.2"
+group = "org.honorato.multistatetogglebutton"
+version = mVersionName
+
+android {
+    namespace "org.honorato.multistatetogglebutton"
+    compileSdkVersion 34
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 11
+        targetSdkVersion 34
+        versionCode mVersionCode
+        versionName mVersionName
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
 }
 
-tasks.register("javadocJar", Jar) {
-    dependsOn javadoc
-    from javadoc.destinationDir
-    archiveClassifier.set("javadoc")
-}*/
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1' // Ganti dengan AndroidX
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            afterEvaluate {
+                from components.findByName("release")
+            }
+
+            groupId = 'com.github.agamk24'
+            artifactId = 'MultiStateToggleButton'
+            version = mVersionName
+        }
+    }
+}
