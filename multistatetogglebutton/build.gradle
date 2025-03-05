@@ -29,6 +29,12 @@ android {
         }
     }
 
+    buildTypes {
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
     lint {
         baseline = file("lint-baseline.xml")
     }
@@ -74,16 +80,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1' // Ganti dengan AndroidX
 }
 
-publishing {
-    publications {
-        release(MavenPublication) {
-            afterEvaluate {
-                from components.findByName("release")
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.findByName('release')
             }
-
-            groupId = 'com.github.agamk24'
-            artifactId = 'MultiStateToggleButton'
-            version = mVersionName
         }
     }
 }
