@@ -18,11 +18,3 @@ allprojects {
         mavenCentral()
     }
 }
-
-publishing {
-    publications {
-        release(MavenPublication) {
-            from components.release
-        }
-    }
-}
